@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Peer Tutor App</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+<h1>PeerMatcher</h1>
+  <h3>"Connecting Students with Tutors for Academic Support"</h3>
+
+
+
+<div id="authBox" class="box">
+  <h3>Login / Sign Up</h3>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign Up</button>
+</div>
+
+<div id="mainApp" class="hide">
+  <button class="logout" onclick="logout()">Logout</button>
+  <p>Signed in as: <b><span id="displayUsername"></span></b></p>
+
+  <div class="container">
+    <div class="box">
+      <h3>Register as Tutor</h3>
+      <input type="text" id="tutorGrade" placeholder="Enter your grade (For example, 7)">
+      <select id="tutorSubject" onchange="toggleOther(this, 'tutorOther')">
+        <option value="">Select Subject</option>
+        <option value="Math">Math</option>
+        <option value="Lit and Comp">Lit and Comp</option>
+        <option value="Writing">Writing</option>
+        <option value="Social Studies">Social Studies</option>
+        <option value="Science">Science</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" id="tutorOther" placeholder="Enter subject" style="display:none">
+      <button onclick="registerTutor()">Register Tutor</button>
+    </div>
+
+    <div class="box">
+      <h3>Register as Help Seeker</h3>
+      <input type="text" id="seekerGrade" placeholder="Enter your grade (For example, 6)">
+      <select id="seekerSubject" onchange="toggleOther(this, 'seekerOther')">
+        <option value="">Select Subject</option>
+        <option value="Math">Math</option>
+        <option value="Lit and Comp">Lit and Comp</option>
+        <option value="Writing">Writing</option>
+        <option value="Social Studies">Social Studies</option>
+        <option value="Science">Science</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" id="seekerOther" placeholder="Enter subject" style="display:none">
+      <button onclick="registerSeeker()">Register Seeker</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="box">
+      <h3>Available Tutors</h3>
+      <table>
+        <thead><tr><th>Username</th><th>Subject</th><th>Grade</th></tr></thead>
+        <tbody id="tutorList"></tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <h3>Help Seekers</h3>
+      <table>
+        <thead><tr><th>Username</th><th>Subject</th><th>Grade</th><th>Action</th></tr></thead>
+        <tbody id="seekerList"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="box">
+      <h3>Matched Tutors & Seekers</h3>
+      <div id="matchMessage" class="match-message"></div>
+      <table>
+        <thead><tr><th>Help Seeker</th><th>Subject</th><th>Grade</th><th>Tutor</th><th>Grade</th><th>Action</th></tr></thead>
+        <tbody id="matchedList"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
