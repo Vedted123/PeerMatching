@@ -88,7 +88,7 @@ function matchSeeker(id, seeker) {
     if (tutors) {
       const eligible = Object.entries(tutors).filter(([key, tutor]) =>
         tutor.subject.toLowerCase() === seeker.subject.toLowerCase() &&
-        Math.abs(tutor.grade - seeker.grade) <= 3
+        Math.abs(seeker.grade - tutor.grade) <= 3
       );
 
       if (eligible.length > 0) {
