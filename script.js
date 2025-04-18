@@ -8,23 +8,25 @@ const firebaseConfig = {
   messagingSenderId: "871101246393",
   appId: "1:871101246393:web:474ce51f90c8dff383a468"
 };
-
+// Initializing the Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const auth = firebase.auth();
 let currentUser = null;
 let username = null;
 
+// Returns email id adding @peerapp.com to the end
 function emailify(name) {
   return `${name}@peerapp.com`;
 }
 
+// Logs in to account with username and password
 function login() {
   username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
   auth.signInWithEmailAndPassword(emailify(username), password).catch(e => alert(e.message));
 }
-
+// Creates new account and logs you into it.
 function signup() {
   username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
@@ -34,7 +36,7 @@ function signup() {
 function logout() {
   auth.signOut();
 }
-
+// This function updates the user's login info
 auth.onAuthStateChanged(user => {
   if (user) {
     currentUser = user;
@@ -48,6 +50,7 @@ auth.onAuthStateChanged(user => {
     document.getElementById("mainApp").classList.add("hide");
   }
 });
+
 
 function toggleOther(select, otherId) {
   document.getElementById(otherId).style.display = select.value === "Other" ? "block" : "none";
